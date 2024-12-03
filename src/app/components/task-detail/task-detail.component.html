@@ -1,0 +1,10 @@
+<div *ngIf="task">
+  <h2>Edit Task: {{ task.title }}</h2>
+  <quill-editor [(ngModel)]="task.description"></quill-editor>
+  <select [(ngModel)]="task.status">
+    <option value="To Do">To Do</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Done">Done</option>
+  </select>
+  <button (click)="updateTask()">Save Changes</button>
+</div>
