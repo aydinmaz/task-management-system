@@ -30,3 +30,30 @@
   display: flex;
   justify-content: center;
 }
+
+.filter-sort-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-sort-container input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-sort-container select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  min-width: 150px;
+}

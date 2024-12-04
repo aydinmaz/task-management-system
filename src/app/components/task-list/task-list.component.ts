@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../task.interface';
 
-
-
 @Component({
   standalone: false,
   selector: 'task-list',
@@ -12,14 +10,19 @@ import { Task } from '../task.interface';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  // tasks: Task[] = [];
   isLoading = true;
   tasksToDo: Task[] = [];
   tasksInProgress: Task[] = [];
   tasksDone: Task[] = [];
 
-  constructor (private readonly taskService: TaskService,
-    private readonly router: Router,
+  // Filtering and sorting
+  filterText: string = '';
+  sortField: string = 'title'; // Default sorting field
+  sortOrder: 'asc' | 'desc' = 'asc'; // Default sorting order
+
+  constructor (
+    private readonly taskService: TaskService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,16 +32,40 @@ export class TaskListComponent implements OnInit {
   loadTasks(): void {
     this.taskService.getTasks().subscribe((tasks) => {
       this.isLoading = false;
-      this.tasksToDo = tasks.filter((task) => task.status === 'To Do');
-      this.tasksInProgress = tasks.filter((task) => task.status === 'In Progress');
-      this.tasksDone = tasks.filter((task) => task.status === 'Done');
+      this.tasksToDo = this.filterAndSortTasks(
+        tasks.filter((task) => task.status === 'To Do')
+      );
+      this.tasksInProgress = this.filterAndSortTasks(
+        tasks.filter((task) => task.status === 'In Progress')
+      );
+      this.tasksDone = this.filterAndSortTasks(
+        tasks.filter((task) => task.status === 'Done')
+      );
+    });
+  }
+
+  filterAndSortTasks(tasks: Task[]): Task[] {
+    // Filter tasks
+    let filteredTasks = tasks.filter(
+      (task) =>
+        task.title.toLowerCase().includes(this.filterText.toLowerCase()) ||
+        task.description.toLowerCase().includes(this.filterText.toLowerCase())
+    );
+
+    // Sort tasks
+    return filteredTasks.sort((a, b) => {
+      const fieldA = a[this.sortField as keyof Task];
+      const fieldB = b[this.sortField as keyof Task];
+      if (fieldA < fieldB) return this.sortOrder === 'asc' ? -1 : 1;
+      if (fieldA > fieldB) return this.sortOrder === 'asc' ? 1 : -1;
+      return 0;
     });
   }
 
   deleteTask(id: number): void {
     this.isLoading = true;
     this.taskService.deleteTask(id).subscribe(() => {
-      this.loadTasks()
+      this.loadTasks();
     });
     setTimeout(() => {
       this.isLoading = false;
@@ -48,7 +75,6 @@ export class TaskListComponent implements OnInit {
   editTask(id: number) {
     this.router.navigate(['tasks', id]);
   }
-
 
   onDrop(event: any): void {
     if (event.previousContainer === event.container) {
@@ -76,5 +102,9 @@ export class TaskListComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  goToDashboard() {
+    this.router.navigate(['dashboard']);
   }
 }

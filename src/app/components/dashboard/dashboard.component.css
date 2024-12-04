@@ -1,20 +1,13 @@
-.dashboard {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
 
-.stat {
-  text-align: center;
-}
 
-mat-progress-bar {
-  margin: 10px 0;
+.task-card {
+  margin: auto;
+  margin-top: 2rem;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: azure;
+  width: 50%;
 }

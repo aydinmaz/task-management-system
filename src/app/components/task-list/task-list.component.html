@@ -1,4 +1,18 @@
 <div *ngIf="!isLoading">
+  <!-- Filtering and Sorting -->
+  <div class="filter-sort-container">
+    <input matInput type="text" placeholder="Filter tasks..." [(ngModel)]="filterText" (input)="loadTasks()" />
+    <select [(ngModel)]="sortField" (change)="loadTasks()">
+      <option value="title">Sort by Title</option>
+      <option value="description">Sort by Description</option>
+    </select>
+    <select [(ngModel)]="sortOrder" (change)="loadTasks()">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </div>
+
+  <!-- Task Columns -->
   <div class="status-columns">
     <div class="status-column" id="ToDo" cdkDropList [cdkDropListData]="tasksToDo"
       (cdkDropListDropped)="onDrop($event)">
@@ -6,11 +20,8 @@
       <div *ngFor="let task of tasksToDo" class="task-card" cdkDrag>
         <h4>{{ task.title }}</h4>
         <p>{{ task.description }}</p>
-        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit
-        </button>
-        <span class="btn">
-          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
-        </span>
+        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
       </div>
     </div>
 
@@ -20,11 +31,8 @@
       <div *ngFor="let task of tasksInProgress" class="task-card" cdkDrag>
         <h4>{{ task.title }}</h4>
         <p>{{ task.description }}</p>
-        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit
-        </button>
-        <span class="btn">
-          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
-        </span>
+        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
       </div>
     </div>
 
@@ -34,22 +42,25 @@
       <div *ngFor="let task of tasksDone" class="task-card" cdkDrag>
         <h4>{{ task.title }}</h4>
         <p>{{ task.description }}</p>
-        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit
-        </button>
-        <span class="btn">
-          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
-        </span>
+        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
       </div>
     </div>
   </div>
 
   <div class="button-container">
+    <span style="margin-right: 1rem;">
+      <button mat-fab extended (click)="goToDashboard()">
+        Go To Dashboard
+      </button>
+    </span>
     <button mat-fab extended (click)="editTask(0)">
       <mat-icon>add</mat-icon>
       Add Task
     </button>
   </div>
 </div>
+
 <div class="spinner-container" *ngIf="isLoading">
   <mat-spinner mode="indeterminate"></mat-spinner>
 </div>

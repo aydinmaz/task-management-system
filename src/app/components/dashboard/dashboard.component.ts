@@ -5,9 +5,9 @@ import { Task } from '../task.interface';
 
 @Component({
   standalone: false,
-
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   taskStats = { toDo: 0, inProgress: 0, done: 0 };
