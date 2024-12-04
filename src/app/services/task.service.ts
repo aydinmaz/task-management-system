@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { Task } from '../components/task.interface';
 
 
@@ -23,6 +23,19 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiUrl).pipe(delay(1500)); // Fake delay
   }
 
+  getTaskById(id: number): Observable<Task> {
+    return this.http.get<Task[]>(this.apiUrl).pipe(
+      map((tasks) => {
+        const task = tasks.find((task) => task.id == id);
+        if (!task) {
+          throw new Error(`Task with ID ${id} not found`);
+        }
+        return task;
+      })
+    );
+  }
+
+
   addTask(task: Task): Observable<Task> {
     return this.http.post<Task>(this.apiUrl, task);
   }
@@ -40,7 +53,7 @@ export class TaskService {
       this.tasks = tasks;
       this.isLoading = false;
     });
-    const task = this.tasks.find((t) => t.id === taskId);
+    const task = this.tasks.find((t) => t.id == taskId);
     if (task) task.status = newStatus;
   }
 }

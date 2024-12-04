@@ -4,6 +4,9 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../task.interface';
 
 @Component({
+  standalone: false,
+
+  // imports: [CommonModule, DragDropModule],
   selector: 'task-board',
   templateUrl: './task-board.component.html',
   styleUrls: ['./task-board.component.css'],

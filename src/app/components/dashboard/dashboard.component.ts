@@ -4,6 +4,8 @@ import { Task } from '../task.interface';
 
 
 @Component({
+  standalone: false,
+
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
 })

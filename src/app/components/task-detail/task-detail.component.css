@@ -1,0 +1,66 @@
+
+
+/* h2 {
+  text-align: center;
+  color: #3f51b5;
+  margin-bottom: 1rem;
+}
+
+.form-fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.container{
+  margin:10rem 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+
+h2 {
+  text-align: center;
+  color: #3f51b5;
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin: 2rem auto; /* Adjust the spacing */
+  max-width: 800px; /* Limit the container width */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: stretch; /* Make the children span the full width */
+}
+
+.form-fields {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for better responsiveness */
+  gap: 1rem; /* Add space between the fields */
+}
+
+mat-form-field {
+  flex: 1 1 calc(33.33% - 1rem); /* Make fields responsive and take equal space */
+  min-width: 200px; /* Set a minimum width */
+}
+
+.button-group {
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}

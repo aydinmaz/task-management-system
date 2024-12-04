@@ -1,26 +1,55 @@
-<div *ngIf="isLoading">
-  <mat-card *ngFor="let n of [1, 2, 3]" appearance="outlined"></mat-card>
-</div>
-
 <div *ngIf="!isLoading">
-  <div *ngFor="let task of tasks" class="container">
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>{{ task.title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div>{{ task.description }}</div>
-        <strong>Status: </strong> {{ task.status }}
-      </mat-card-content>
-
-      <mat-card-actions align="end">
-        <button mat-raised-button color="primary" routerLink="'/tasks', task.id">Edit
+  <div class="status-columns">
+    <div class="status-column" id="ToDo" cdkDropList [cdkDropListData]="tasksToDo"
+      (cdkDropListDropped)="onDrop($event)">
+      <h3>To Do</h3>
+      <div *ngFor="let task of tasksToDo" class="task-card" cdkDrag>
+        <h4>{{ task.title }}</h4>
+        <p>{{ task.description }}</p>
+        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit
         </button>
         <span class="btn">
           <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
         </span>
+      </div>
+    </div>
 
-      </mat-card-actions>
-    </mat-card>
+    <div class="status-column" id="InProgress" cdkDropList [cdkDropListData]="tasksInProgress"
+      (cdkDropListDropped)="onDrop($event)">
+      <h3>In Progress</h3>
+      <div *ngFor="let task of tasksInProgress" class="task-card" cdkDrag>
+        <h4>{{ task.title }}</h4>
+        <p>{{ task.description }}</p>
+        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit
+        </button>
+        <span class="btn">
+          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="status-column" id="Done" cdkDropList [cdkDropListData]="tasksDone"
+      (cdkDropListDropped)="onDrop($event)">
+      <h3>Done</h3>
+      <div *ngFor="let task of tasksDone" class="task-card" cdkDrag>
+        <h4>{{ task.title }}</h4>
+        <p>{{ task.description }}</p>
+        <button mat-raised-button color="primary" (click)="editTask(task.id)">Edit
+        </button>
+        <span class="btn">
+          <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Delete</button>
+        </span>
+      </div>
+    </div>
   </div>
+
+  <div class="button-container">
+    <button mat-fab extended (click)="editTask(0)">
+      <mat-icon>add</mat-icon>
+      Add Task
+    </button>
+  </div>
+</div>
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner mode="indeterminate"></mat-spinner>
 </div>

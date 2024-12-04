@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { TaskListComponent } from './components/task-list/task-list.component';
+import { Router } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TaskListComponent],
+  standalone: false,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'task-management-system';
+  constructor (private readonly router: Router) {
+  }
 }
