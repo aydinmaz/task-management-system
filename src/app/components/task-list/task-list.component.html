@@ -13,7 +13,7 @@
   </div>
 
   <!-- Task Columns -->
-  <div class="status-columns">
+  <div cdkDropListGroup class="status-columns">
     <div class="status-column" id="ToDo" cdkDropList [cdkDropListData]="tasksToDo"
       (cdkDropListDropped)="onDrop($event)">
       <h3>To Do</h3>

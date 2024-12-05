@@ -34,33 +34,26 @@ h2 {
 }
 
 .container {
-  margin: 2rem auto; /* Adjust the spacing */
-  max-width: 800px; /* Limit the container width */
+  margin: 2rem auto;
+  max-width: 800px;
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: stretch; /* Make the children span the full width */
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .form-fields {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping for better responsiveness */
-  gap: 1rem; /* Add space between the fields */
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 mat-form-field {
-  flex: 1 1 calc(33.33% - 1rem); /* Make fields responsive and take equal space */
-  min-width: 200px; /* Set a minimum width */
+  flex: 1 1 calc(33.33% - 1rem);
+  min-width: 200px;
 }
 
 .button-group {
   display: flex;
   justify-content: end;
   margin-top: 1rem;
-}
-
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
 }

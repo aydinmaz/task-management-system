@@ -1,7 +1,7 @@
 {
   "tasks": [
     {
-      "title": "Task 1",
+      "title": "Task 2",
       "description": "Description 9",
       "status": "To Do",
       "id": "1"
@@ -23,12 +23,6 @@
       "title": "Task 5",
       "description": "Description 5",
       "status": "Done"
-    },
-    {
-      "id": "6",
-      "title": "task2",
-      "description": "zzc",
-      "status": "To Do"
     }
   ]
 }

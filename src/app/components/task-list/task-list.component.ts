@@ -77,6 +77,7 @@ export class TaskListComponent implements OnInit {
   }
 
   onDrop(event: any): void {
+    console.log('dropevent:', event);
     if (event.previousContainer === event.container) {
       return; // Task was dropped in the same column
     }
